@@ -610,6 +610,7 @@ diesel::table! {
         token -> Text,
         published -> Timestamptz,
         local_user_id -> Int4,
+        valid -> Bool,
     }
 }
 

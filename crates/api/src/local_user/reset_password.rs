@@ -22,11 +22,8 @@ pub async fn reset_password(
     .ok_or(LemmyErrorType::IncorrectLogin)?;
 
   // Check for too many attempts (to limit potential abuse)
-  let recent_resets_count = PasswordResetRequest::get_recent_password_resets_count(
-    &mut context.pool(),
-    local_user_view.local_user.id,
-  )
-  .await?;
+  let recent_resets_count =
+    PasswordResetRequest::recent_count(&mut context.pool(), local_user_view.local_user.id).await?;
   if recent_resets_count >= 3 {
     Err(LemmyErrorType::PasswordResetLimitReached)?
   }

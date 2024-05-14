@@ -12,6 +12,7 @@ pub struct PasswordResetRequest {
   pub token: String,
   pub published: DateTime<Utc>,
   pub local_user_id: LocalUserId,
+  pub valid: bool,
 }
 
 #[cfg_attr(feature = "full", derive(Insertable, AsChangeset))]
